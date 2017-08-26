@@ -3,10 +3,29 @@ from django import template
 from django.utils.safestring import mark_safe
 from django.utils.translation import get_language
 
-from .conf import settings
-from .widgets import get_supported_language
+from dtp_widget.conf import settings
 
 register = template.Library()
+
+supported_locales = [
+    'ar', 'az', 'bg', 'bn', 'ca', 'cs', 'da', 'de', 'ee', 'el', 'es', 'fi', 'fr', 'he', 'hr', 'hu', 'hy', 'id', 'is',
+    'it', 'ja', 'ka', 'ko', 'lt', 'lv', 'ms', 'nb', 'nl', 'no', 'pl', 'pt-BR', 'pt', 'ro', 'rs-latin', 'rs', 'ru',
+    'sk', 'sl', 'sv', 'sw', 'th', 'tr', 'ua', 'uk', 'zh-CN', 'zh-TW'
+]
+
+
+def get_supported_language(language_country_code):
+    if not language_country_code:
+        return 'en'
+
+    if language_country_code in supported_locales:
+        return language_country_code
+
+    language = language_country_code.split('-')[0]
+    if language in supported_locales:
+        return language
+
+    return 'en'
 
 
 @register.simple_tag

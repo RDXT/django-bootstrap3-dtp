@@ -2,4 +2,4 @@
 VERSION = (1, 0, 2)
 __version__ = '.'.join(map(str, VERSION if VERSION[-1] else VERSION[:2]))
 
-default_app_config = 'dtp_widget.conf.B3datetimepickerConfig'
+default_app_config = 'dtp_widget.conf.DtpWidgetConfig'
